@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react'
 import AppBar from '@mui/material/AppBar'
 import Button from "@mui/material/Button"
 import OutlinedCard from "./OutlinedCard"
-import DataGridDemo from './dataGrid'
+import DataGrid from './DataGrid'
 import { red, lightBlue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -20,16 +20,15 @@ const theme = createTheme({
 });
 
 function App() {  
-  const [thePrices, setThePrices] = useState({})
+  const [thePrices, setThePrices] = useState(null)
 
 
-  useEffect(()=>{
+  useEffect(()=>{ 
     fetch()
-
   },[]);
 
   const fetch = async () => {
-    let prices ={}
+    let prices = {}
        
     let Data = await axios.get("https://brum9013jb.execute-api.eu-central-1.amazonaws.com/default/getBlockchain")
     prices.coinBaseBTCaskPrice = Data.data.body.coinBaseBTCaskPrice
@@ -44,19 +43,15 @@ function App() {
 
     setThePrices(prices)
 
-  }
 
-  console.log(thePrices)
+  }
 
 
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <header className="App-header">
-          <AppBar color = "primary">
-            CryptoAdviser
-          </AppBar>
+          <AppBar color = "primary"> CryptoAdviser </AppBar>
           <div style={{display:'flex', justifyContent: "space-around"}}>
             <h2 style={{float: "left"}}> BTC</h2>
             <h2 style={{float: "right"}}> ETH </h2>
@@ -65,9 +60,8 @@ function App() {
             <OutlinedCard theme = {theme} crypto='btc'/>
             <OutlinedCard crypto = 'eth' />
           </div>
-          <DataGridDemo style ={{justifyContent: "center"}} />
-        </header>
-      </div>
+          <DataGrid prices={thePrices} style ={{justifyContent: "center"}} />
+    </div>
     </ThemeProvider>
   );
 }

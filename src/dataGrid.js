@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import OutlinedCard from './OutlinedCard';
 import { red, lightBlue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import globalpricesRef from './OutlinedCard'
+import { create } from '@mui/material/styles/createTransitions';
 
 
 const theme = createTheme({
@@ -42,12 +43,27 @@ const columns = [
 
 const rows = [
   { id: 1, Crypto: 'Ethereum', Buy: 3, sell: 1002, Provider: "CoinBase"},
-  {id: 2,  Crypto: 'Ethereum', Buy: 100, sell: 1002, Provider: "BlockChain"},
+  { id: 2,  Crypto: 'Ethereum', Buy: 100, sell: 1002, Provider: "BlockChain"},
   { id: 3, Crypto: 'BitCoin', Buy: 100, sell: 1002, Provider: "CoinBase" },
   { id: 4, Crypto: 'BitCoin', Buy: 100, sell: 1002 , Provider: "BlockChain"}
 ];
 
-export default function DataGridDemo() {
+export default function Grid(props) {
+  console.log('PRICES FROM GRID - ', props.prices)
+  
+  const [prices, setPrices] = useState(null)
+  const [gridRows, setGridRows] = useState([])
+
+  useEffect(()=>{
+    if(props.prices !== null) createRows(props.prices)
+  })
+
+
+  function createRows(priceObj){
+
+
+  }
+
   return (
     <ThemeProvider theme={theme}>
         <div style={{ height: 400, width: '100%' }}>
@@ -59,7 +75,7 @@ export default function DataGridDemo() {
         color: 'primary.secondary',
         },
     }}
-            rows={rows}
+            rows={gridRows}
             columns={columns}
             color = 'white'
         />
