@@ -1,3 +1,5 @@
+# Backend for this application is in the cryptoAdviser_backend repository
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
