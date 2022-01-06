@@ -41,18 +41,13 @@ const columns = [
   
 ];
 
-const rows = [
-  { id: 1, Crypto: 'Ethereum', Buy: 3, sell: 1002, Provider: "CoinBase"},
-  { id: 2,  Crypto: 'Ethereum', Buy: 100, sell: 1002, Provider: "BlockChain"},
-  { id: 3, Crypto: 'BitCoin', Buy: 100, sell: 1002, Provider: "CoinBase" },
-  { id: 4, Crypto: 'BitCoin', Buy: 100, sell: 1002 , Provider: "BlockChain"}
-];
 
 export default function Grid(props) {
   console.log('PRICES FROM GRID - ', props.prices)
   
   const [prices, setPrices] = useState(null)
   const [gridRows, setGridRows] = useState([])
+  const count = 1
 
   useEffect(()=>{
     if(props.prices !== null) createRows(props.prices)
@@ -60,7 +55,14 @@ export default function Grid(props) {
 
 
   function createRows(priceObj){
-
+    // console.log(priceObj.coinBaseBTCaskPrice)
+    const rows = [
+      { id: 1, Crypto: 'Ethereum', Buy: priceObj.coinBaseETHbidPrice, sell: priceObj.coinBaseETHaskPrice, Provider: "CoinBase"},
+      { id: 2,  Crypto: 'Ethereum', Buy: priceObj.ETHbidPrice, sell: priceObj.ETHaskPrice, Provider: "BlockChain"},
+      { id: 3, Crypto: 'BitCoin', Buy: priceObj.coinBaseBTCbidPrice, sell: priceObj.coinBaseBTCaskPrice, Provider: "CoinBase" },
+      { id: 4, Crypto: 'BitCoin', Buy: priceObj.BTCbidPrice, sell: priceObj.BTCaskPrice , Provider: "BlockChain"}
+    ];
+    setGridRows(rows)
 
   }
 
